@@ -16,8 +16,6 @@ Created on Tue Jan 30 11:42:46 2024
 import numpy as np
 
 #TNG loading
-import sys
-sys.path.insert(0, "C:/Users/97018/Desktop/Galaxy/Code/TNG50-1/illustris_python-master/")
 import illustris_python as il
 import h5py
 
@@ -64,47 +62,9 @@ from intersect import intersection
 
 
 
-#------Change the path for subhalo and particle data for your need------
-basePath100 = "G:/TNG100/output"
-basePath50 = 'G:/TNG50/output'
-TNG50=h5py.File('G:/TNG50/postprocessing/simulation.hdf5file/simulation.hdf5', 'r')
+import config as cfg
 
 
-
-
-#------Define the snapshot for the galaxy population------
-snap=99
-
-#------Define cosmology parameters in TNG50------
-#Hubble constant 'little h' in units of [100 km/s/Mpc]
-h=il.groupcat.loadHeader(basePath50,snap)["HubbleParam"]
-#Scale factor c=1/(1+z)
-c=il.groupcat.loadHeader(basePath50,snap)["Time"]
-#Box size in TNG50 in unit of kpc
-Lbox=35000*c/h
-#Gravitational constant in unif of [kpc^3 Gyr^-2 Msun^-1]
-G=4.4985e-06
-#Hubble constant in units of [km/s/Mpc]
-H0=100*h
-#Matter density at this snapshot
-Om0=il.groupcat.loadHeader(basePath50,snap)['Omega0']
-#Dark energy density at this snapshot
-OmL=il.groupcat.loadHeader(basePath50,snap)['OmegaLambda']
-#Baryonic matter density at this snapshot
-Omb=0.0486
-#Define cosmology model using astropy
-cosmo=FlatLambdaCDM(H0=H0, Om0=Om0,Ob0=Omb)
-#Get the age of the universe in this snapshot
-universe_age=cosmo.age(0).to_value()
-
-
-
-
-#Transformation between redshift and snapshot
-redshift=[]
-for i in range(100):
-    redshift.append(il.groupcat.loadHeader(basePath100,i)["Redshift"])
-redshift=np.array(redshift)
 
 
 
@@ -149,6 +109,7 @@ def kpcoGyr_to_kmos(x):
     """
     xp=0.9778139490713819*x
     return xp
+
 def kmos_to_kpcoGyr(x):
     """
     Transform the unit of velocity from [km/s] to [kpc/Gyr]
@@ -204,7 +165,8 @@ def smooth_curve(x,y,sigma=1):
     
     return x_g1d,y_g1d
 
-def format_particles(coords,center, Lbox=[Lbox,Lbox,Lbox]):
+
+def format_particles(coords,center):
     """
     center the particle coordinates on (0,0,0) and account for PBCs
     
@@ -224,6 +186,9 @@ def format_particles(coords,center, Lbox=[Lbox,Lbox,Lbox]):
         array of shape (nptcls, 3) storing the centered particle 
         coordinates [kpc]
     """
+    h=cfg.h #Hubble constant 'little h' in units of [100 km/s/Mpc]
+    c=cfg.c #scale factor
+    Lbox=cfg.Lbox*c/h #Box size in simulation in unit of kpc
 
     dx = coords[:,0] - center[0]
     dy = coords[:,1] - center[1]
@@ -317,7 +282,7 @@ def align_coordinates_with_angular_momentum(coordinates, j_direc):
 
 
 #------Decomposition functions------
-def get_kinematics_archeology(ID,snap=snap,RmaxoRhalf=5):
+def get_kinematics_archeology(ID,RmaxoRhalf=5):
     """
     Calculate the phase-space coordinates and other dynamical quantites
     for galaxy with specific ID and snapshot
@@ -363,10 +328,13 @@ def get_kinematics_archeology(ID,snap=snap,RmaxoRhalf=5):
         array of shape (25,25) storing the stellar density profile of 
         this subhalo
     """
+    basePath50 = cfg.path
+    snap=cfg.snap #snapshot
+    h=cfg.h #Hubble constant 'little h' in units of [100 km/s/Mpc]
+    z=cfg.z #redshift
+    c=cfg.c #scale factor
     
-    
-    
-    c=il.groupcat.loadHeader(basePath50,snap)["Time"]
+
     
     #-----------load data-----------
     subhalo=il.groupcat.loadSingle(basePath50,snap,subhaloID=ID)
@@ -430,7 +398,7 @@ def get_kinematics_archeology(ID,snap=snap,RmaxoRhalf=5):
 
     
     #-----------define softening length [kpc]-----------
-    eps = gsoft(redshift[snap])*np.ones(len(mass))
+    eps = gsoft(z)*np.ones(len(mass))
     
     #-----------Region where to compute the-----------
     #-----------angular momentum to align the galaxy-----------
@@ -484,13 +452,13 @@ def get_kinematics_archeology(ID,snap=snap,RmaxoRhalf=5):
     print("kinematics calculated")
     
     #-----------calculate age and metallicity for stars-----------
-    birth_a=stellar_particles["GFM_StellarFormationTime"]
-    birth_z=1/birth_a-1
-    age=cosmo.lookback_time(birth_z).to_value()
+    #birth_a=stellar_particles["GFM_StellarFormationTime"]
+    #birth_z=1/birth_a-1
+    #age=cosmo.lookback_time(birth_z).to_value()
     #FeoH_sun=np.log10(55.845/1.0079) + (7.5 - 12)
     #FeoH=np.log10(stellar_particles["GFM_Metals"].T[8]/stellar_particles["GFM_Metals"].T[0])-FeoH_sun
-    Z=stellar_particles["GFM_Metallicity"]/0.0127
-    print("archeology calculated")
+    #Z=stellar_particles["GFM_Metallicity"]/0.0127
+    #print("archeology calculated")
     
     #-----------select stars-----------
     skill=np.where((r<=RmaxoRhalf*hmr)&(r>eps[0])&(stellar_particles["GFM_StellarFormationTime"]>0)&
@@ -501,9 +469,9 @@ def get_kinematics_archeology(ID,snap=snap,RmaxoRhalf=5):
     pos_s=stars_pos[skill]
     vel_s=stars_vel[skill]
     mass_s=stars_mass[skill]
-    age_s=age[skill]
+    #age_s=age[skill]
     #FeoH_s=FeoH[skill]
-    Z_s=Z[skill]
+    #Z_s=Z[skill]
     print("stellar particles selected ")
     
     #use overlapping binning to obtain stellar density profile
@@ -521,7 +489,7 @@ def get_kinematics_archeology(ID,snap=snap,RmaxoRhalf=5):
     
     
 
-    return jzojc_s, jpojc_s, eb_s, pos_s, vel_s, mass_s, age_s, Z_s,TUratio_s,profile
+    return jzojc_s, jpojc_s, eb_s, pos_s, vel_s, mass_s, TUratio_s, profile
 
 def get_phi(pos,mass,eps,theta=0.5):
     """
@@ -550,6 +518,7 @@ def get_phi(pos,mass,eps,theta=0.5):
     Phi0 : float
         the gravitational potential of the farthest particle, i.e. the minimum
     """
+    G=cfg.G
     
 
     kdtree=ConstructTree(pos, mass, softening=eps)
@@ -592,7 +561,7 @@ def get_midplane_pot_vc(rxy_target,pos,mass,eps,kdtree):
         array of shape (N,) storing the gravitational potential of 
         mid-plane [kpc^2 Gyr^-2]
     """
-    
+    G=cfg.G
     #Assuming axisymmtry and calulate potential and velocity by averaging
     #four points with equal sampling distance in the mid-plane 
     rs = np.array([position for r in rxy_target for position in [(r, 0, 0), (0, r, 0), (-r, 0, 0), (0, -r, 0)]], dtype=float)
