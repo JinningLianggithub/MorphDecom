@@ -6,11 +6,10 @@ A new morphological decomposition method introduced in Liang, Jiang et al. (2024
 `git clone https://github.com/JinningLianggithub/MorphDecom.git` to clone the repository
 
 - Modules
+  
 decomposition_method.py: a series of functions for loading data from TNG50, calculating dynamical quantities, re-estimating gravitational potential, finding binding energy threshold and circularity threshold and decomposing galaxies
 
-
 config.py: global variables and user controls including the path of your simulation and cosmology parameters that you use
-
 
 snap_z_a.txt: a table matching snapshot with redshift and scale factor in TNG50
 
