@@ -1,7 +1,7 @@
 # MorphDecom
 
 ## Overview
-"MorphDecom" is a morphological decomposition method introduced by Liang, Jiang et al. (2024), building on earlier work by Zana et al. (2022). This innovative method combines threshold-based decomposition for elliptical components with a machine learning approach for disky components. It dynamically adjusts binding energy and circularity thresholds based on the specific galaxy system under analysis.
+"MorphDecom" is a morphological decomposition method introduced by Liang, Jiang et al. (2024), building on earlier work by Zana et al. (2022). This innovative method combines threshold-based decomposition for elliptical components with a machine learning approach for disky components. It dynamically adjusts binding energy and circularity thresholds based on the specific galaxy system under analysis. If you find this method helpful to you and want to use it in your research, please cite Liang, Jiang et al. (2024). Please feel free to contact the authors Jinning Liang (jinning.liang@durham.ac.uk) and Fangzhou Jiang (fangzhou.jiang@pku.edu.cn), if you have any question.
 
 ## Installation
 Clone the repository using the following command:
@@ -86,3 +86,6 @@ Ecut = -0.6770199113338333
 nbins = 401
 Etacut = 0.796667590832109
 ```
+
+## More usage
+Here, we only calculate dynamics for different galactic components, one can also calculate more quantities, e.g., chemical abundance and age for components by editing `decomposition_method.get_kinematics_archeology`
