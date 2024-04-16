@@ -14,10 +14,12 @@ config.py: global variables and user controls including the path of your simulat
 snap_z_a.txt: a table matching snapshot with redshift and scale factor in TNG50
 
 - Dependent libraries and packages
+  
 numpy, illustris_python, scipy, pytreegrav, intersect, scikit-learn
 
 
 - Guidence
+  
 Before decompose galaxies, one must set the path of your simulation, cosmology parameters, the ID and snapshot of the galaxy that you want to decompose
 
 `
