@@ -60,18 +60,20 @@ cfg.z = zlist[cfg.snap]
 cfg.c = scalefactorlist[cfg.snap]
 cfg.G = 4.4985e-06
 cfg.Lbox = np.array([35000*cfg.c/cfg.h, 35000*cfg.c/cfg.h, 35000*cfg.c/cfg.h])
-ID = 516101
+ID = 516101```
 
 
 After setting the configurations, run the decomposition process with:
+```
 # Decompose the galaxy
 jzojc_s, jpojc_s, eb_s, pos_s, vel_s, mass_s, VirialRatio_s, profile_s = de.get_kinematics_archeology(ID)
 Ecut = de.get_Ecut(eb_s, mass_s)
 eta_cut = de.get_etacut(jzojc_s, jpojc_s, eb_s, mass_s, Ecut, smoothing=True, sigma=1)
-decomposition = de.assign_label_Zana_fixed(eb_s, jzojc_s, mass_s, Ecut, eta_cut)
+decomposition = de.assign_label_Zana_fixed(eb_s, jzojc_s, mass_s, Ecut, eta_cut)```
 
 
 The following is a sample output for a decomposed galaxy:
+```
 data loaded
 galaxy rotated
 phi, T calculated
@@ -82,3 +84,4 @@ density profile calculated --- all done
 Ecut = -0.6770199113338333
 nbins = 401
 Etacut = 0.796667590832109
+```
