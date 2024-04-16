@@ -1,7 +1,7 @@
 # MorphDecom
 
 A new morphological decomposition method introduced in Liang, Jiang et al. (2024), extended from Zana et al. (2022). This method adapts binding energy threshold-based method for decomposing elliptical components from Zana et al. (2022) combining with machine learning-based method for decomposing disky components. In this method, we can obtain running threshold for binding energy and circularity depending on the galaxy system.
-
+`[]: o.integrate(t,p,m)`
 - Installation
 'git clone https://github.com/JinningLianggithub/MorphDecom.git' to clone the repository
 
