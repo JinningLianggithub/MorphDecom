@@ -22,17 +22,14 @@ numpy, illustris_python, scipy, pytreegrav, intersect, scikit-learn
   
 Before decompose galaxies, one must set the path of your simulation, cosmology parameters, the ID and snapshot of the galaxy that you want to decompose
 
-`
-import numpy as np
+`import numpy as np
 import config as cfg
 import decomposition_method as de
-
 
 timetabel=np.loadtxt("./snap_z_a.txt")
 snaplist=timetabel.T[0]
 scalefactorlist=timetabel.T[1]
 zlist=timetabel.T[2]
-
 
 cfg.path="/media/31TB1/TNG50-1/output"
 cfg.snap=99
