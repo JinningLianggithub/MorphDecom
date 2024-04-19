@@ -71,6 +71,8 @@ Ecut = de.get_Ecut(eb_s, mass_s)
 eta_cut = de.get_etacut(jzojc_s, jpojc_s, eb_s, mass_s, Ecut, smoothing=True, sigma=1)
 decomposition = de.assign_label_Zana_fixed(eb_s, jzojc_s, mass_s, Ecut, eta_cut)
 ```
+Here, "decomposition" saves the labels for stellar particles (bulge=1, halo=2, thin disk=3, thick disk=4)
+
 
 ### output
 The following is a sample output for a decomposed galaxy:
