@@ -89,5 +89,9 @@ nbins = 401
 Etacut = 0.796667590832109
 ```
 
+
+## Decomposition image
+![Description of the image](snap99_516101.pdf)
+
 ## More usage
 Here, we only calculate dynamics for different galactic components, one can also calculate more quantities, e.g., chemical abundance and age for components by editing `decomposition_method.get_kinematics_archeology`
