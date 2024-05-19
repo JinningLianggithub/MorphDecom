@@ -34,61 +34,13 @@ Install the following libraries and packages to ensure the software functions co
 - matplotlib
 
 ## Usage Guide
-### Configuration
-Before starting the decomposition process, configure the following parameters:
-1. Path to your simulation data
-2. Cosmological parameters
-3. ID and snapshot of the galaxy for decomposition
+First, one needs to download the particle data and obtain the information for the host subhalo. Here we assume that we already get the data and information. Full example including download TNG50 data is provided in ```example.ipynb```.
 
-Example configuration script:
-```python
-import numpy as np
-import config as cfg
-import decomposition_method as de
+To load the particle data, one can simply use ```h5py``` to read hdf5 file. Here we use powerful tool ```scida``` to load the data. And we construct two dictionaries saving subhalo information and particle data. For subhalo dictionary, it contains its position, velocity, half-stellar-mass radius, the number of gas, dark matter and stellar particles. For particle disctionary, it contains the coordinates, velocities, masses for gas, dark matter and stellar particles. One can also include the formation time for stellar particles to exlucde wind particles. All units must be physical rather than comoving. Here, we take kpc for length unit, kpc/Gyr for velocity unit and Msun for mass unit. This could be done by ```scida```. 
 
-# Load and set configuration from file
-timetable = np.loadtxt("./snap_z_a.txt")
-snaplist = timetable.T[0]
-scalefactorlist = timetable.T[1]
-zlist = timetable.T[2]
+After constructing the subhalo and particle dictionary, one can calculate dynamical quantities using ```decomposition.get_kinematics```. These quantities can be further used in finding energy and circularity threshold in ```decomposition.get_Ecut``` and  ```decomposition.get_etacut```.
 
-# Set the configuration parameters
-cfg.path = "/media/31TB1/TNG50-1/output"
-cfg.snap = 99
-cfg.h = il.groupcat.loadHeader(cfg.path, cfg.snap)["HubbleParam"]
-cfg.z = zlist[cfg.snap]
-cfg.c = scalefactorlist[cfg.snap]
-cfg.G = 4.4985e-06
-cfg.Lbox = np.array([35000*cfg.c/cfg.h, 35000*cfg.c/cfg.h, 35000*cfg.c/cfg.h])
-ID = 516101
-```
-
-### Decompose the galaxy
-After setting the configurations, run the decomposition process with:
-```python
-jzojc_s, jpojc_s, eb_s, pos_s, vel_s, mass_s, VirialRatio_s, profile_s = de.get_kinematics_archeology(ID)
-Ecut = de.get_Ecut(eb_s, mass_s)
-eta_cut = de.get_etacut(jzojc_s, jpojc_s, eb_s, mass_s, Ecut, smoothing=True, sigma=1)
-decomposition = de.assign_label_Zana_fixed(eb_s, jzojc_s, mass_s, Ecut, eta_cut)
-```
-Here, "decomposition" saves the labels for stellar particles (bulge=1, halo=2, thin disk=3, thick disk=4)
-
-
-### output
-The following is a sample output for a decomposed galaxy:
-```
-data loaded
-galaxy rotated
-phi, T calculated
-jc calculated
-kinematics calculated
-stellar particles selected
-density profile calculated --- all done
-Ecut = -0.6770199113338333
-nbins = 401
-Etacut = 0.796667590832109
-```
-
+Finally, one can use dynamical quantities and two threshold to do decomposition and obtain a decomposition mask 
 
 ## Decomposition image
 Using the plotting function in ```decomposition.py```, one can generate the face-on and edge-on images of different components in this example galaxy
