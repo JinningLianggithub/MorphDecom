@@ -1,10 +1,11 @@
-
-
-
-path=None
+ID=-99
 snap=-99
 h=-99
 z=-99
 c=-99
-G=-99
-Lbox=-99
+G=4.4985e-06
+Om0=-99
+Ob0=-99
+ObL=-99.
+DMmass=-99.
+epsilon=-99.
