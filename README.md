@@ -18,8 +18,7 @@ Clone the repository using the following command:
 - Decompose galaxies into their constituent components
 
 ### `config.py`
-- Contains global variables and user controls
-- Defines paths to simulation data and cosmological parameters
+- Contains global variables and user controls including galaxy ID ```ID``` 
 
 ### `snap_z_a.txt`
 - Provides a lookup table for matching snapshots to redshift and scale factor in TNG50
@@ -27,11 +26,12 @@ Clone the repository using the following command:
 ## Dependencies
 Install the following libraries and packages to ensure the software functions correctly:
 - numpy
-- illustris_python
+- scida
 - scipy
 - pytreegrav
 - intersect
 - scikit-learn
+- matplotlib
 
 ## Usage Guide
 ### Configuration
