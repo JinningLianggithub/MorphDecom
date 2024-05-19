@@ -92,7 +92,7 @@ Etacut = 0.796667590832109
 
 ## Decomposition image
 <p align="center">
-  <img src="https://github.com/JinningLianggithub/MorphDecom/blob/main/snap99_516101.pdf" width=100% height=100%>
+  <img src="https://github.com/JinningLianggithub/MorphDecom/blob/main/snap99_516101.png" width=100% height=100%>
 </p>
 
 ## More usage
