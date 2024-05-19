@@ -91,9 +91,10 @@ Etacut = 0.796667590832109
 
 
 ## Decomposition image
+Using the plotting function in ```decomposition.py```, one can generate the face-on and edge-on images of different components in this example galaxy
 <p align="center">
   <img src="https://github.com/JinningLianggithub/MorphDecom/blob/main/snap99_516101.png" width=100% height=100%>
 </p>
 
 ## More usage
-Here, we only calculate dynamics for different galactic components, one can also calculate more quantities, e.g., chemical abundance and age for components by editing `decomposition_method.get_kinematics_archeology`
+After doing decomposition for all stellar particles, one gets a decomposition mask for them. Next, one can select bulge, halo, thin disc and thick particles can calculate other quantities for them, e.g. chemical abundance, age, etc.
