@@ -56,7 +56,7 @@ After doing decomposition for all stellar particles, one gets a decomposition ma
 ## Credit and support
 
 If you use "MorphDecom", please cite the following BibTex entry:
-`
+```
   @ARTICLE{2024arXiv240314749L,
          author = {{Liang}, Jinning and {Jiang}, Fangzhou and {Mo}, Houjun and {Benson}, Andrew and {Dekel}, Avishai and {Tavron}, Noa and {Hopkins}, Philip F. and {Ho}, Luis C.},
           title = "{Connection between galaxy morphology and dark-matter halo structure I: a running threshold for thin discs and size predictors from the dark sector}",
@@ -73,4 +73,4 @@ If you use "MorphDecom", please cite the following BibTex entry:
          adsurl = {https://ui.adsabs.harvard.edu/abs/2024arXiv240314749L},
         adsnote = {Provided by the SAO/NASA Astrophysics Data System}
   }
-`
+```
