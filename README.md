@@ -51,3 +51,26 @@ Using the plotting function ```decomposition.image_plot```, one can generate the
 
 ## More usage
 After doing decomposition for all stellar particles, one gets a decomposition mask for them. Next, one can select bulge, halo, thin disc and thick particles can calculate other quantities for them, e.g. chemical abundance, age, etc.
+
+
+## Credit and support
+
+If you use "MorphDecom", please cite the following BibTex entry:
+
+  @ARTICLE{2024arXiv240314749L,
+         author = {{Liang}, Jinning and {Jiang}, Fangzhou and {Mo}, Houjun and {Benson}, Andrew and {Dekel}, Avishai and {Tavron}, Noa and {Hopkins}, Philip F. and {Ho}, Luis C.},
+          title = "{Connection between galaxy morphology and dark-matter halo structure I: a running threshold for thin discs and size predictors from the dark sector}",
+        journal = {arXiv e-prints},
+       keywords = {Astrophysics - Astrophysics of Galaxies, Astrophysics - Cosmology and Nongalactic Astrophysics},
+           year = 2024,
+          month = mar,
+            eid = {arXiv:2403.14749},
+          pages = {arXiv:2403.14749},
+            doi = {10.48550/arXiv.2403.14749},
+  archivePrefix = {arXiv},
+         eprint = {2403.14749},
+   primaryClass = {astro-ph.GA},
+         adsurl = {https://ui.adsabs.harvard.edu/abs/2024arXiv240314749L},
+        adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+  }
+
