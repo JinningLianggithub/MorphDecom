@@ -40,10 +40,11 @@ To load the particle data, one can simply use ```h5py``` to read hdf5 file. Here
 
 After constructing the subhalo and particle dictionary, one can calculate dynamical quantities using ```decomposition.get_kinematics```. These quantities can be further used in finding energy and circularity threshold in ```decomposition.get_Ecut``` and  ```decomposition.get_etacut```.
 
-Finally, one can use dynamical quantities and two threshold to do decomposition and obtain a decomposition mask 
+Finally, one can use dynamical quantities and two thresholds to do decomposition and obtain a decomposition mask by ```decomposition.assign_label```
+
 
 ## Decomposition image
-Using the plotting function in ```decomposition.py```, one can generate the face-on and edge-on images of different components in this example galaxy
+Using the plotting function ```decomposition.image_plot```, one can generate the face-on and edge-on images of different components in this example galaxy
 <p align="center">
   <img src="https://github.com/JinningLianggithub/MorphDecom/blob/main/snap99_516101.png" width=100% height=100%>
 </p>
