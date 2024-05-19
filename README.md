@@ -18,7 +18,7 @@ Clone the repository using the following command:
 - Decompose galaxies into their constituent components
 
 ### `config.py`
-- Contains global variables and user controls including galaxy ID ```ID``` 
+- Contains global variables and user controls including galaxy (Subfind) ID ```ID```, snapshot of the simulation ```snap```, hubble constant "little h" ```h```, redshift of the simulation ```z```, scale factor of the simulation ```c```, total matter density of the simulation at redshift 0 ```Om0```, baryonic matter density of the simulation at redshift 0 ```Omb```, dark energy desity of the simulation at redshift 0 ```OmL```, dark matter mass of the simulation as unit of 1e10Msun/h ```DMmass```, and gravitational solfening length of the simulation at this redshift ```epsilon```
 
 ### `snap_z_a.txt`
 - Provides a lookup table for matching snapshots to redshift and scale factor in TNG50
