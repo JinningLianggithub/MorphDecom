@@ -10,18 +10,18 @@ Clone the repository using the following command:
 
 
 ## Modules
-### `decomposition_method.py`
-- Functions to load data from TNG50
-- Calculate dynamical quantities
-- Re-estimate gravitational potential
-- Find binding energy and circularity thresholds
-- Decompose galaxies into their constituent components
+### `decomposition.py`
+- Functions to use data from loaded simulation to calculate dynamical quantities ```decomposition.get_kinematics```
+- Find binding energy ```decomposition.get_Ecut```
+- Find circularity thresholds ```decomposition.get_etacut```
+- Decompose galaxies into their constituent components ```decomposition.assign_label```
+- Plot the face-on and edge-on image for different components ```decomposition.image_plot```
 
 ### `config.py`
 - Contains global variables and user controls including galaxy (Subfind) ID ```ID```, snapshot of the simulation ```snap```, hubble constant "little h" ```h```, redshift of the simulation ```z```, scale factor of the simulation ```c```, total matter density of the simulation at redshift 0 ```Om0```, baryonic matter density of the simulation at redshift 0 ```Omb```, dark energy desity of the simulation at redshift 0 ```OmL```, dark matter mass of the simulation as unit of 1e10Msun/h ```DMmass```, and gravitational solfening length of the simulation at this redshift ```epsilon```
 
 ### `snap_z_a.txt`
-- Provides a lookup table for matching snapshots to redshift and scale factor in TNG50
+- Provides a lookup table for matching snapshots to redshift and scale factor in TNG50. This is only for converting redshift and scale factor from snapshot. One can use the table from other simulation or just input the redshift and scale factor manually
 
 ## Dependencies
 Install the following libraries and packages to ensure the software functions correctly:
