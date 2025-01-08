@@ -849,8 +849,14 @@ def get_etacut(jzojc,jpojc,eb,mass,Ecut,smoothing=True,sigma=1):
     #GMM label, which is random
     #Here 0 doesn't mean smaller one since it's random
     #Bin circularity for different gaussian components
-    hist1 = np.histogram(data.T[0][np.where(GMMlabel==0)], bins='auto')
-    hist2 = np.histogram(data.T[0][np.where(GMMlabel==1)], bins='auto')
+
+    min_val=0
+    max_val=1.
+    n_bins = int(np.sqrt(len(data.T[0])))  # or use another method to determine bin count
+    bins = np.linspace(min_val, max_val, n_bins)
+    
+    hist1 = np.histogram(data.T[0][np.where(GMMlabel==0)], bins=bins)
+    hist2 = np.histogram(data.T[0][np.where(GMMlabel==1)], bins=bins)
     
     
     if len(np.where(GMMlabel==0)[0])<=30 or len(np.where(GMMlabel==1)[0])<=30:
@@ -866,6 +872,11 @@ def get_etacut(jzojc,jpojc,eb,mass,Ecut,smoothing=True,sigma=1):
     y1=hist1[0]
     x2=(hist2[1][1:]+hist2[1][:-1])/2
     y2=hist2[0]
+
+    x1=x1[y1>0]
+    y1=y1[y1>0]
+    x2=x2[y2>0]
+    y2=y2[y2>0]
     
     
     
@@ -897,13 +908,18 @@ def get_etacut(jzojc,jpojc,eb,mass,Ecut,smoothing=True,sigma=1):
         pass
     else:
             
-        hist1 = np.histogram(data.T[0][np.where(GMMlabel==1)], bins='auto')
-        hist2 = np.histogram(data.T[0][np.where(GMMlabel==0)], bins='auto')
+        hist1 = np.histogram(data.T[0][np.where(GMMlabel==1)], bins=bins)
+        hist2 = np.histogram(data.T[0][np.where(GMMlabel==0)], bins=bins)
         
         x1=(hist1[1][1:]+hist1[1][:-1])/2
         y1=hist1[0]
         x2=(hist2[1][1:]+hist2[1][:-1])/2
         y2=hist2[0]
+
+        x1=x1[y1>0]
+        y1=y1[y1>0]
+        x2=x2[y2>0]
+        y2=y2[y2>0]
         
         
         
